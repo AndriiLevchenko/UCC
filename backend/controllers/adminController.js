@@ -8,18 +8,18 @@ import userModel from "../models/userModel.js";
 
 const addDoctor = async (req, res)=>{
     try {
-        const {name, email, password, speciality, degree, experience, about, fees, address} = req.body;
+        const {name, email, password, speciality, experiencedate, about, fees, address} = req.body;
         const imageFile = req.file;
 
         // checking if all Data to add doctor
-        if(!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address) {
+        if(!name || !email || !password || !speciality || !experiencedate || !about || !fees || !address) {
            return res.json({success: false, message: 'Missdding details'})
         }
 
         // checking an e-mail to add doctor
-        if(!validator.isEmail(email)){
-            return res.json({success: false, message: 'Enter a valid e-mail'})
-        }
+        // if(!validator.isEmail(email)){
+        //     return res.json({success: false, message: 'Enter a valid e-mail'})
+        // }
 
         // hashing doctor's  Password
         const salt = await bcrypt.genSalt(10);
@@ -40,8 +40,7 @@ const addDoctor = async (req, res)=>{
             image: imageUrl,
             password: hashedPassword,
             speciality,
-            degree,
-            experience,
+            experiencedate,
             about,
             fees,
             address: JSON.parse(address),

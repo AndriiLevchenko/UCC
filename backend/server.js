@@ -14,6 +14,7 @@ connectCloudinary()
 
 app.use(express.json())
 app.use(cors())
+// app.use(cors({ origin: 'http://127.0.0.1:4000' }))
 
 app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)

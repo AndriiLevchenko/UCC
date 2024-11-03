@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 const DoctorProfile = () => {
      const {dToken, profileData, setProfileData, getProfileData, backendUrl} = useContext(DoctorContext);
      const {currency} = useContext(AppContext);
-     console.log( 'backendUrl  = ',  backendUrl);
+     console.log( 'profileData  = ',  profileData);
      const [isEdit, setIsEdit] = useState(false);
 
 
@@ -49,11 +49,11 @@ const DoctorProfile = () => {
 
                 <div className='flex-1 border border-stone-100 rounded-lg p-8 py-7 bg-white'>
 
-                    {/* ----- Doc Info : name, degree, experience ----- */}
+                    {/* ----- Doc Info : name, experience ----- */}
 
-                    <p className='flex items-center gap-2 text-3xl font-medium text-gray-700'>{profileData.name}</p>
+                    <p className='flex items-center gap-2 text-3xl font-medium text-gray-700'>{profileData.experiencedate}</p>
                     <div className='flex items-center gap-2 mt-1 text-gray-600'>
-                        <p>{profileData.degree} - {profileData.speciality}</p>
+                        <p> {profileData.speciality}</p>
                         <button className='py-0.5 px-2 border text-xs rounded-full'>{profileData.experience}</button>
                     </div>
 

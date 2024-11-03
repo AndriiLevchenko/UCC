@@ -7,16 +7,15 @@ import axios from "axios";
 const AddDoctor = () => {
 
     const [docImg, setDocImg] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState('Olena');
+    const [email, setEmail] = useState('uainfmm@gmail.com');
     const [password, setPassword] = useState('');
-    const [experience, setExperience] = useState('1 Year');
-    const [fees, setFees] = useState('');
+    const [experiencedate, setExperienceDate] = useState('');
+    const [fees, setFees] = useState('0');
     const [about, setAbout] = useState('');
-    const [speciality, setSpeciality] = useState('General physician');
-    const [degree, setDegree] = useState('');
-    const [address1, setAddress1] = useState('');
-    const [address2, setAddress2] = useState('');
+    const [speciality, setSpeciality] = useState('Консультант');
+    const [address1, setAddress1] = useState('60326 Frankfurt am Main');
+    const [address2, setAddress2] = useState('Mainzer Landstraße 293');
 
     const {backendUrl, aToken} = useContext(AdminContext);
 
@@ -26,34 +25,49 @@ const AddDoctor = () => {
             if(!docImg) {
                 return toast.error('Image not selected')
             }
+
+            console.log(' new  experiencedate = ',   new Date(experiencedate));
+
+            //const date = docSlots[slotIndex][0].datetime
+            // let day = experiencedate.slice(9, 10);
+            // let month = experiencedate.slice(6, 7);
+            // let year = experiencedate.slice(0, 4);
+            // let newDate = day + "_" + month + "_" + year;
+            const newExpDate =  new Date(experiencedate);
+            const formattedDate =  newExpDate.toLocaleDateString('en-GB', { year: 'numeric', day: '2-digit', month: '2-digit' }).replace(/[/]/g, '_');;
+            console.log(' newExpDate, formattedDate = ',  newExpDate, formattedDate);
+
             const formData = new  FormData();
             formData.append('image', docImg);
             formData.append('name', name);
             formData.append('email', email);
             formData.append('password', password);
-            formData.append('experience', experience);
+            formData.append('experiencedate', formattedDate);
             formData.append('fees', Number(fees));
             formData.append('about', about);
             formData.append('speciality', speciality);
-            formData.append('degree', degree);
             formData.append('address', JSON.stringify({line1: address1, line2: address2}));
+
 
             //console.log(formData)
             formData.forEach((value, key)=>{
                 console.log(`${key} : ${value}`);
             })
+
+
+
+            console.log('formData = ',  formData);
             const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: {aToken}});
             if(data.success) {
                 toast.success(data.message);
                 setDocImg(false);
-                setName('');
-                setEmail('');
-                setPassword('');
-                setDegree('');
+                setName('Olena');
+                setEmail('uainfmm@gmail.com');
+                setPassword('Uktainischencenter2024');
                 setAbout('');
-                setFees('');
-                setAddress1('');
-                setAddress2('');
+                setFees('0');
+                setAddress1('60326 Frankfurt am Main');
+                setAddress2('Mainzer Landstraße 293');
             } else {
                 toast.error(data.message);
             }
@@ -65,38 +79,32 @@ const AddDoctor = () => {
     }
     return (
         <form onSubmit={onSubmitHandler} className='m-5 w-full'>
-            <p className='mb-3 text-lg font-medium'>Add Doctor</p>
+            <p className='mb-3 text-lg font-medium'>Add Berater</p>
             <div className='bg-white px-8 py-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll '>
                 <div className='flex items-center gap-4 mb-8 text-gray-500 '>
                     <label htmlFor={'doc-img'} >
                         <img className='w-16 bg-gray-100 rounded-full cursor-pointer' src={docImg ? URL.createObjectURL(docImg) : assets.upload_area} alt='' />
                     </label>
                     <input onChange={(e)=>setDocImg(e.target.files[0])} type='file' id='doc-img' hidden />
-                    <p>Upload Doctor picture</p>
+                    <p>Upload Berater picture</p>
                 </div>
                 <div className='flex flex-col items-start lg:flex-row gap-10 text-gray-600'>
                     <div className='w-full lg:flex-1 flex flex-col gap-4 '>
                         <div className='flex flex-1 flex-col gap-1'>
-                            <p> Doctor name</p>
-                            <input onChange={(e)=>setName(e.target.value)} value={name} className='border rounded px-4 py-2' type='text' placeholder='Name' required/>
+                            <p> Berater name</p>
+                            <input onChange={(e)=>setName(e.target.value)} value={name} className='border rounded px-4 py-2' type='text' placeholder='Olena' required/>
                         </div>
                         <div className='flex flex-1 flex-col gap-1'>
-                            <p> Doctor email</p>
-                            <input onChange={(e)=>setEmail(e.target.value)} value={email} className='border rounded px-4 py-2'  type='email' placeholder='E-mail' required/>
+                            <p> Berater email</p>
+                            <input onChange={(e)=>setEmail(e.target.value)} value={email} className='border rounded px-4 py-2'  type='email' placeholder='uainfmm@gmail.com' required/>
                         </div>
                         <div className='flex flex-1 flex-col gap-1'>
-                            <p> Doctor password</p>
-                            <input onChange={(e)=>setPassword(e.target.value)} value={password} className='border rounded px-4 py-2'  type='password' placeholder='Password' required/>
+                            <p> Berater password</p>
+                            <input onChange={(e)=>setPassword(e.target.value)} value={password} className='border rounded px-4 py-2'  type='password' placeholder='Uktainischencenter2024' required/>
                         </div>
                         <div className='flex flex-1 flex-col gap-1'>
-                            <p> Experience</p>
-                            <select onChange={(e)=>setExperience(e.target.value)} value={experience} className='border rounded px-4 py-2'  name='' id=''>
-                                <option value='1 Year'>1 Year</option>
-                                <option value='2 Year'>2 Year</option>
-                                <option value='3 Year'>3 Year</option>
-                                <option value='4 Year'>4 Year</option>
-                                <option value='5 Year'>5 Year</option>
-                            </select>
+                            <p> Date</p>
+                            <input onChange={(e)=>setExperienceDate(e.target.value)} value={experiencedate} type="date" id="start" name="trip-start"  min="2024-11-01" max="2028-11-01" />
                         </div>
                         <div className='flex flex-1 flex-col gap-1'>
                             <p> Fees</p>
@@ -107,22 +115,18 @@ const AddDoctor = () => {
                         <div className='flex flex-1 flex-col gap-1'>
                             <p> Speciality</p>
                             <select onChange={(e)=>setSpeciality(e.target.value)} value={speciality} className='border rounded px-4 py-2'   name='' id=''>
-                                <option value='General physician'>General physician</option>
-                                <option value='Gynecologist'>Gynecologist</option>
-                                <option value='Dermatologist'>Dermatologist</option>
-                                <option value='Pediatrician'>Pediatrician</option>
-                                <option value='Neurologist'>Neurologist</option>
-                                <option value='Gastroenterologist'>Gastroenterologist</option>
+                                <option value='General physician'>Консультант</option>
+                                <option value='Gynecologist'>Консультант</option>
+                                <option value='Dermatologist'>Консультант</option>
+                                <option value='Pediatrician'>Консультант</option>
+                                <option value='Neurologist'>Консультант</option>
+                                <option value='Gastroenterologist'>Консультант</option>
                             </select>
                         </div>
                         <div className='flex flex-1 flex-col gap-1'>
-                            <p> Education</p>
-                            <input onChange={(e)=>setDegree(e.target.value)} value={degree} className='border rounded px-4 py-2'  type='text' placeholder='Education' required/>
-                        </div>
-                        <div className='flex flex-1 flex-col gap-1'>
                             <p> Address</p>
-                            <input onChange={(e)=>setAddress1(e.target.value)} value={address1}  className='border rounded px-4 py-2'  type='text' placeholder='Address1' required/>
-                            <input onChange={(e)=>setAddress2(e.target.value)} value={address2}  className='border rounded px-4 py-2'  type='text' placeholder='Address2' required/>
+                            <input onChange={(e)=>setAddress1(e.target.value)} value={address1}  className='border rounded px-4 py-2'  type='text' placeholder='Frankfurt-am-Main' required/>
+                            <input onChange={(e)=>setAddress2(e.target.value)} value={address2}  className='border rounded px-4 py-2'  type='text' placeholder='Mainzer Landstraße 293' required/>
                         </div>
                     </div>
                 </div>

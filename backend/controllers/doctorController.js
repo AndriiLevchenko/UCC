@@ -28,10 +28,12 @@ const doctorList = async (req, res)=> {
 
 //API for doctor Login
 const loginDoctor = async (req, res)=> {
+    console.log("req in backend Login = ");
+    console.log("req in backend Login = ", req);
     try {
         console.log("req in backend Login = ", req);
-        const {email, password} = req.body;
-        const doctor = await doctorModel.findOne({email});
+        const {experiencedate, password} = req.body;
+        const doctor = await doctorModel.findOne({experiencedate});
         if(!doctor) {
             return res.json({success: false, message: 'Invalid credentials'});
         }

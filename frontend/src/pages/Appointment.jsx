@@ -8,20 +8,20 @@ import { toast } from 'react-toastify'
 
 const Appointment = () => {
 
-    const { docId } = useParams()
-    const { doctors, currencySymbol, backendUrl, token, getDoctosData } = useContext(AppContext)
-    const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+    const { docId } = useParams();
+    const { doctors, currencySymbol, backendUrl, token, getDoctorsData } = useContext(AppContext);
+    const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-    const [docInfo, setDocInfo] = useState(false)
-    const [docSlots, setDocSlots] = useState([])
-    const [slotIndex, setSlotIndex] = useState(0)
-    const [slotTime, setSlotTime] = useState('')
+    const [docInfo, setDocInfo] = useState({});
+    const [docSlots, setDocSlots] = useState([]);
+    const [slotIndex, setSlotIndex] = useState(0);
+    const [slotTime, setSlotTime] = useState('');
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const fetchDocInfo = async () => {
-        const docInfo = doctors.find((doc) => doc._id === docId)
-        setDocInfo(docInfo)
+        const docInfo = doctors.find((doc) => doc._id == docId)
+        setDocInfo(docInfo || {})
     }
 
     const getAvailableSolts = async () => {
@@ -61,11 +61,14 @@ const Appointment = () => {
                 let month = currentDate.getMonth() + 1
                 let year = currentDate.getFullYear()
 
-                const slotDate = day + "_" + month + "_" + year
+                const slotDate = day + "_" + month + "_" + year;
+                console.log("slotDate = ", slotDate );
                 const slotTime = formattedTime
-
                 const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true
-
+                console.log("docInfo.slots_booked[slotDate] = ", docInfo.slots_booked[slotDate] );
+                console.log("docInfo.slots_booked[slotDate] in Appointmrnts  1 = ", docInfo.slots_booked[slotDate]);
+                console.log("docInfo.slots_booked in Appointmrnts  1 = ", docInfo.slots_booked);
+                console.log("docInfo in Appointmrnts  1 = ", docInfo);
                 if (isSlotAvailable) {
 
                     // Add slot to array
@@ -101,13 +104,14 @@ const Appointment = () => {
         const slotDate = day + "_" + month + "_" + year
 
         try {
-
+            console.log("docId, slotDate, slotTime  1 = ", docId, slotDate, slotTime);
             const { data } = await axios.post(backendUrl + '/api/user/book-appointment', { docId, slotDate, slotTime }, { headers: { token } })
             if (data.success) {
                 toast.success(data.message)
-                getDoctosData()
+                getDoctorsData()
                 navigate('/my-appointments')
             } else {
+                console.log("data.message  docId, slotDate, slotTime = ", data.message,  docId, slotDate, slotTime );
                 toast.error(data.message)
             }
 
@@ -141,12 +145,12 @@ const Appointment = () => {
 
                 <div className='flex-1 border border-[#ADADAD] rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0'>
 
-                    {/* ----- Doc Info : name, degree, experience ----- */}
+                    {/* ----- Doc Info : name, experiencedate ----- */}
 
                     <p className='flex items-center gap-2 text-3xl font-medium text-gray-700'>{docInfo.name} <img className='w-5' src={assets.verified_icon} alt="" /></p>
                     <div className='flex items-center gap-2 mt-1 text-gray-600'>
-                        <p>{docInfo.degree} - {docInfo.speciality}</p>
-                        <button className='py-0.5 px-2 border text-xs rounded-full'>{docInfo.experience}</button>
+                        <p>{docInfo.speciality}</p>
+                        <button className='py-0.5 px-2 border text-xs rounded-full'>{docInfo.experiencedate}</button>
                     </div>
 
                     {/* ----- Doc About ----- */}

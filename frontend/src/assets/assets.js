@@ -91,8 +91,7 @@ export const doctors = [
         name: 'Dr. Richard James',
         image: doc1,
         speciality: 'General physician',
-        degree: 'MBBS',
-        experience: '4 Years',
+        experiencedate: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         address: {
@@ -105,8 +104,7 @@ export const doctors = [
         name: 'Dr. Emily Larson',
         image: doc2,
         speciality: 'Gynecologist',
-        degree: 'MBBS',
-        experience: '3 Years',
+        experiencedate: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
         address: {
@@ -119,8 +117,7 @@ export const doctors = [
         name: 'Dr. Sarah Patel',
         image: doc3,
         speciality: 'Dermatologist',
-        degree: 'MBBS',
-        experience: '1 Years',
+        experiencedate: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
         address: {
@@ -133,8 +130,7 @@ export const doctors = [
         name: 'Dr. Christopher Lee',
         image: doc4,
         speciality: 'Pediatricians',
-        degree: 'MBBS',
-        experience: '2 Years',
+        experiencedate: '2 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 40,
         address: {
@@ -147,8 +143,7 @@ export const doctors = [
         name: 'Dr. Jennifer Garcia',
         image: doc5,
         speciality: 'Neurologist',
-        degree: 'MBBS',
-        experience: '4 Years',
+        experiencedate: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         address: {
@@ -161,8 +156,7 @@ export const doctors = [
         name: 'Dr. Andrew Williams',
         image: doc6,
         speciality: 'Neurologist',
-        degree: 'MBBS',
-        experience: '4 Years',
+        experiencedate: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         address: {
@@ -175,8 +169,7 @@ export const doctors = [
         name: 'Dr. Christopher Davis',
         image: doc7,
         speciality: 'General physician',
-        degree: 'MBBS',
-        experience: '4 Years',
+        experiencedate: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         address: {
@@ -189,8 +182,7 @@ export const doctors = [
         name: 'Dr. Timothy White',
         image: doc8,
         speciality: 'Gynecologist',
-        degree: 'MBBS',
-        experience: '3 Years',
+        experiencedate: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
         address: {
@@ -203,8 +195,7 @@ export const doctors = [
         name: 'Dr. Ava Mitchell',
         image: doc9,
         speciality: 'Dermatologist',
-        degree: 'MBBS',
-        experience: '1 Years',
+        experiencedate: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
         address: {
@@ -217,8 +208,7 @@ export const doctors = [
         name: 'Dr. Jeffrey King',
         image: doc10,
         speciality: 'Pediatricians',
-        degree: 'MBBS',
-        experience: '2 Years',
+        experiencedate: '2 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 40,
         address: {
@@ -231,8 +221,7 @@ export const doctors = [
         name: 'Dr. Zoe Kelly',
         image: doc11,
         speciality: 'Neurologist',
-        degree: 'MBBS',
-        experience: '4 Years',
+        experiencedate: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         address: {
@@ -245,8 +234,7 @@ export const doctors = [
         name: 'Dr. Patrick Harris',
         image: doc12,
         speciality: 'Neurologist',
-        degree: 'MBBS',
-        experience: '4 Years',
+        experiencedate: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         address: {
@@ -259,8 +247,7 @@ export const doctors = [
         name: 'Dr. Chloe Evans',
         image: doc13,
         speciality: 'General physician',
-        degree: 'MBBS',
-        experience: '4 Years',
+        experiencedate: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
         address: {
@@ -273,8 +260,7 @@ export const doctors = [
         name: 'Dr. Ryan Martinez',
         image: doc14,
         speciality: 'Gynecologist',
-        degree: 'MBBS',
-        experience: '3 Years',
+        experiencedate: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
         address: {
@@ -287,8 +273,7 @@ export const doctors = [
         name: 'Dr. Amelia Hill',
         image: doc15,
         speciality: 'Dermatologist',
-        degree: 'MBBS',
-        experience: '1 Years',
+        experiencedate: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
         address: {
