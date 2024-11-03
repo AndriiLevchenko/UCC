@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {assets} from "../../assets/assets.js";
 import {AdminContext} from "../../context/AdminContext.jsx";
 import {toast} from "react-toastify";
@@ -17,7 +17,8 @@ const AddDoctor = () => {
     const [address1, setAddress1] = useState('60326 Frankfurt am Main');
     const [address2, setAddress2] = useState('Mainzer Landstraße 293');
 
-    const {backendUrl, aToken} = useContext(AdminContext);
+
+    const {backendUrl, aToken, doctors, getAllDoctors} = useContext(AdminContext);
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -39,7 +40,7 @@ const AddDoctor = () => {
 
             const formData = new  FormData();
             formData.append('image', docImg);
-            formData.append('name', name);
+            formData.append('name', formattedDate);
             formData.append('email', email);
             formData.append('password', password);
             formData.append('experiencedate', formattedDate);
@@ -57,26 +58,37 @@ const AddDoctor = () => {
 
 
             console.log('formData = ',  formData);
-            const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: {aToken}});
-            if(data.success) {
-                toast.success(data.message);
-                setDocImg(false);
-                setName('Olena');
-                setEmail('uainfmm@gmail.com');
-                setPassword('Uktainischencenter2024');
-                setAbout('');
-                setFees('0');
-                setAddress1('60326 Frankfurt am Main');
-                setAddress2('Mainzer Landstraße 293');
+            console.log('doctors.find = ',  doctors.find((doc)=> doc.experiencedate === formattedDate).experiencedate);
+            if(doctors.find((doc)=> doc.experiencedate === formattedDate)) {
+                toast.warning('Деь' + formattedDate + 'вже в роботі. Оберіть наступний');
             } else {
-                toast.error(data.message);
+                //const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: {aToken}});
+                console.log('formattedDate = ',  formattedDate);
+                console.log('doctors.experiencedate = ',  doctors.find((doc)=> doc.experiencedate === formattedDate));
+                if(data.success) {
+                    toast.success(data.message);
+                    setDocImg(false);
+                    setName('');
+                    setEmail('uainfmm@gmail.com');
+                    setPassword('Uktainischencenter2024');
+                    setAbout('');
+                    setFees('0');
+                    setAddress1('60326 Frankfurt am Main');
+                    setAddress2('Mainzer Landstraße 293');
+                } else {
+                    toast.error(data.message);
+                }
             }
         } catch (error) {
             toast.error(error.message);
             console.log('error = ', error);
         }
-
     }
+    useEffect(()=>{
+        if(aToken) {
+            getAllDoctors();
+        }
+    }, [aToken])
     return (
         <form onSubmit={onSubmitHandler} className='m-5 w-full'>
             <p className='mb-3 text-lg font-medium'>Add Berater</p>
