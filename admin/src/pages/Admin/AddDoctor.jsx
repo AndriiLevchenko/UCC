@@ -58,11 +58,11 @@ const AddDoctor = () => {
 
 
             console.log('formData = ',  formData);
-            console.log('doctors.find = ',  doctors.find((doc)=> doc.experiencedate === formattedDate).experiencedate);
+            //console.log('doctors.find = ',  doctors.find((doc)=> doc.experiencedate === formattedDate).experiencedate);
             if(doctors.find((doc)=> doc.experiencedate === formattedDate)) {
                 toast.warning('Деь' + formattedDate + 'вже в роботі. Оберіть наступний');
             } else {
-                //const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: {aToken}});
+                const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: {aToken}});
                 console.log('formattedDate = ',  formattedDate);
                 console.log('doctors.experiencedate = ',  doctors.find((doc)=> doc.experiencedate === formattedDate));
                 if(data.success) {
