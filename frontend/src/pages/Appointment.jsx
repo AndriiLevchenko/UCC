@@ -16,11 +16,11 @@ const Appointment = () => {
     const [docSlots, setDocSlots] = useState([]);
     const [slotIndex, setSlotIndex] = useState(0);
     const [slotTime, setSlotTime] = useState('');
-
+    console.log("docInfo, slotIndex, getDoctorsData = ", docInfo,  slotIndex, getDoctorsData );
     const navigate = useNavigate();
 
     const fetchDocInfo = async () => {
-        const docInfo = doctors.find((doc) => doc._id == docId)
+        const docInfo = doctors.find((doc) => doc._id == docId);
         setDocInfo(docInfo || {})
     }
 
@@ -65,10 +65,6 @@ const Appointment = () => {
                 console.log("slotDate = ", slotDate );
                 const slotTime = formattedTime
                 const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true
-                console.log("docInfo.slots_booked[slotDate] = ", docInfo.slots_booked[slotDate] );
-                console.log("docInfo.slots_booked[slotDate] in Appointmrnts  1 = ", docInfo.slots_booked[slotDate]);
-                console.log("docInfo.slots_booked in Appointmrnts  1 = ", docInfo.slots_booked);
-                console.log("docInfo in Appointmrnts  1 = ", docInfo);
                 if (isSlotAvailable) {
 
                     // Add slot to array
@@ -104,14 +100,12 @@ const Appointment = () => {
         const slotDate = day + "_" + month + "_" + year
 
         try {
-            console.log("docId, slotDate, slotTime  1 = ", docId, slotDate, slotTime);
             const { data } = await axios.post(backendUrl + '/api/user/book-appointment', { docId, slotDate, slotTime }, { headers: { token } })
             if (data.success) {
                 toast.success(data.message)
                 getDoctorsData()
                 navigate('/my-appointments')
             } else {
-                console.log("data.message  docId, slotDate, slotTime = ", data.message,  docId, slotDate, slotTime );
                 toast.error(data.message)
             }
 
@@ -168,10 +162,12 @@ const Appointment = () => {
                 <p >Час зустрічі</p>
                 <div className='flex gap-3 items-center w-full flex-wrap mt-4'>
                     {docSlots.length && docSlots.map((item, index) => (
-                        <div onClick={() => setSlotIndex(index)} key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-primary text-white' : 'border border-[#DDDDDD]'}`}>
+                        <button onClick={() => {console.log(" item[0].datetime.getDate() docInfo.name = ",  item[0].datetime.getDate(), docInfo.name.slice(0, 2) );
+                                                    setSlotIndex(index);
+                                                }} key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${ item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2)) ? 'bg-primary text-white' : 'disabled opacity-30 border border-[#DDDDDD]'}`} disabled={item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2))  ? '' : 'disabled'} >
                             <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                             <p>{item[0] && item[0].datetime.getDate()}</p>
-                        </div>
+                        </button>
                     ))}
                 </div>
 

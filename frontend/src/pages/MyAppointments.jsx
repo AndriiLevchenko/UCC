@@ -133,12 +133,12 @@ const MyAppointments = () => {
                             <img className='w-36 bg-[#EAEFFF]' src={item.docData.image} alt="" />
                         </div>
                         <div className='flex-1 text-sm text-[#5E5E5E]'>
-                            <p className='text-[#262626] text-base font-semibold'>{item.docData.name}</p>
+                            <p className='text-[#262626] text-base font-semibold'> {slotDateFormat(item.slotDate)}</p>
                             <p>{item.docData.speciality}</p>
-                            <p className='text-[#464646] font-medium mt-1'>Address:</p>
+                            <p className='text-[#464646] font-medium mt-1'>Адреса:</p>
                             <p className=''>{item.docData.address.line1}</p>
                             <p className=''>{item.docData.address.line2}</p>
-                            <p className=' mt-1'><span className='text-sm text-[#3C3C3C] font-medium'>Date & Time:</span> {slotDateFormat(item.slotDate)} |  {item.slotTime}</p>
+                            <p className=' mt-1'><span className='text-sm text-[#3C3C3C] font-medium'>Дата та час:</span> {slotDateFormat(item.slotDate)} |  {item.slotTime}</p>
                         </div>
                         <div></div>
                         <div className='flex flex-col gap-2 justify-end text-sm text-center'>

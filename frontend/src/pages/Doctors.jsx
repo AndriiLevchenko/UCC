@@ -24,6 +24,14 @@ const Doctors = () => {
   //   applyFilter()
   // }, [doctors, speciality])
 
+  const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  // Function to format the date eg. ( 20_01_2000 => 20 Jan 2000 )
+  const slotDateFormat = (slotDate) => {
+    const dateArray = slotDate.split('_')
+    return dateArray[0] + " " + months[Number(dateArray[1])] + " " + dateArray[2]
+  }
+
   return (
     <div>
       {/*<p className='text-gray-600'>Browse through the doctors specialist.</p>*/}
@@ -45,7 +53,7 @@ const Doctors = () => {
                 <div className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : "text-gray-500"}`}>
                   <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{item.available ? 'Є вільний час' : "На жаль весь час вичерпано"}</p>
                 </div>
-                <p className='text-[#262626] text-lg font-medium'>{item.name}</p>
+                <p className='text-[#262626] text-lg font-medium'> {slotDateFormat(item.name)}</p>
                 <p className='text-[#5C5C5C] text-sm'>{item.speciality}</p>
               </div>
             </div>

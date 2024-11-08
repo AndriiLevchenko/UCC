@@ -18,8 +18,8 @@ const RelatedDoctors = ({ speciality, docId }) => {
     return (
         <div className='flex flex-col items-center gap-4 my-16 text-[#262626]'>
             <h1 className='text-3xl font-medium'>Інші дні</h1>
-            <p className='sm:w-1/3 text-center text-sm'>Оберіть інший день для зустрічі</p>
-            <div className=' flex flex-wrap w-full gap-4 pt-5 gap-y-6 px-3 sm:px-0'>
+            <p className='sm:w-1/2 text-center text-sm'>Оберіть інший день для зустрічі</p>
+            <div className=' flex flex-wrap justify-between w-full gap-4 pt-5 gap-y-6 px-3 sm:px-0'>
                 {relDoc.map((item, index) => (
                     <div onClick={() => { navigate(`/appointment/${item._id}`); scrollTo(0, 0) }} className='border border-[#C9D8FF] w-[260px] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500' key={index}>
                         <img className='bg-[#EAEFFF]' src={item.image} alt="" />
