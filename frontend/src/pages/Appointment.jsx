@@ -16,7 +16,7 @@ const Appointment = () => {
     const [docSlots, setDocSlots] = useState([]);
     const [slotIndex, setSlotIndex] = useState(0);
     const [slotTime, setSlotTime] = useState('');
-    console.log("docInfo, slotIndex, getDoctorsData = ", docInfo,  slotIndex, getDoctorsData );
+    console.log("docInfo, slotIndex = ", docInfo,  slotIndex);
     const navigate = useNavigate();
 
     const fetchDocInfo = async () => {
@@ -63,6 +63,7 @@ const Appointment = () => {
 
                 const slotDate = day + "_" + month + "_" + year;
                 console.log("slotDate = ", slotDate );
+                console.log(" docInfo = ",  docInfo );
                 const slotTime = formattedTime
                 const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true
                 if (isSlotAvailable) {
@@ -90,7 +91,8 @@ const Appointment = () => {
             toast.warning('Login to book appointment')
             return navigate('/login')
         }
-
+        console.log(" docSlots = ",  docSlots);
+        console.log(" docSlots[slotIndex][0] = ",  docSlots[slotIndex][0]);
         const date = docSlots[slotIndex][0].datetime
 
         let day = date.getDate()
@@ -164,7 +166,7 @@ const Appointment = () => {
                     {docSlots.length && docSlots.map((item, index) => (
                         <button onClick={() => {console.log(" item[0].datetime.getDate() docInfo.name = ",  item[0].datetime.getDate(), docInfo.name.slice(0, 2) );
                                                     setSlotIndex(index);
-                                                }} key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${ item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2)) ? 'bg-primary text-white' : 'disabled opacity-30 border border-[#DDDDDD]'}`} disabled={item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2))  ? '' : 'disabled'} >
+                                                }} key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${ item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2)) ? 'bg-primary text-white' : 'disabled opacity-30 border border-[#DDDDDD]'}`} disabled={item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2))  ? '' : ''} >
                             <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                             <p>{item[0] && item[0].datetime.getDate()}</p>
                         </button>
