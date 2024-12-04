@@ -6,13 +6,30 @@ const RelatedDoctors = ({ speciality, docId }) => {
     const navigate = useNavigate()
     const { doctors } = useContext(AppContext)
 
-    const [relDoc, setRelDoc] = useState([])
+    const [filterDoc, setFilterDoc] = useState([]);
+    const [relDoc, setRelDoc] = useState(filterDoc);
 
-    useEffect(() => {
-        if (doctors.length > 0 && speciality) {
-            const doctorsData = doctors.filter((doc) => doc.speciality === speciality && doc._id !== docId)
-            setRelDoc(doctorsData)
+    const applyFilter = () => {
+        const today = new Date();
+        setFilterDoc(doctors.filter(doc => {
+            //const timeName = doc.name;
+            const timeDate = new Date(doc.name.slice(3, 5) + "/" + doc.name.slice(0, 2) + "/" + doc.name.slice(6, 10));
+            //console.log("  timeDate, today.getTime(), timeDate.getTime()  = ", timeDate, today.getTime(), timeDate.getTime());
+            //console.log("  new Date()  = ", new Date('11/09/2024').getTime() -  new Date('11/08/2024').getTime());
+            //console.log("  timeDate, today  = ", timeDate, today );
+            return timeDate.getTime() >= (today.getTime())
+        }));
+        // if (filterDoc.length > 0 && speciality) {
+        if (filterDoc.length > 0) {
+            const doctorsData = filterDoc.filter((doc) => doc._id !== docId);
+            console.log("doctorsData = ", doctorsData);
+            let sortedDoctors = doctorsData.sort((c1, c2) => (c1.experiencedate > c2.experiencedate)  ? 1 : (c1.experiencedate < c2.experiencedate) ? -1 : 0);
+            console.log("sortedDoctors = ", sortedDoctors);
+            setRelDoc(sortedDoctors)
         }
+    }
+    useEffect(() => {
+        applyFilter()
     }, [doctors, speciality, docId])
 
     return (

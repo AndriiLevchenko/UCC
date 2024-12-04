@@ -13,7 +13,7 @@ const addDoctor = async (req, res)=>{
 
         // checking if all Data to add doctor
         if(!name || !email || !password || !speciality || !experiencedate || !about || !fees || !address) {
-           return res.json({success: false, message: 'Missdding details'})
+           return res.json({success: false, message: 'Missing details'})
         }
 
         // checking an e-mail to add doctor
@@ -24,7 +24,7 @@ const addDoctor = async (req, res)=>{
         // hashing doctor's  Password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-
+console.log("name in Controller = ", name);
         // validating strong password
         if(password.length < 8){
             return res.json({success: false, message: 'Enter a strong Password'})
@@ -44,7 +44,7 @@ const addDoctor = async (req, res)=>{
             about,
             fees,
             address: JSON.parse(address),
-            date: Date.now()
+            date
         }
         const newDoctor = new doctorModel(doctorData);
         await newDoctor.save()

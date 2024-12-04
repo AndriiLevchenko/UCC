@@ -36,8 +36,8 @@ const AddDoctor = () => {
             // let newDate = day + "_" + month + "_" + year;
             const newExpDate =  new Date(experiencedate);
             const formattedDate =  newExpDate.toLocaleDateString('en-GB', { year: 'numeric', day: '2-digit', month: '2-digit' }).replace(/[/]/g, '_');;
-            console.log(' newExpDate, formattedDate = ',  newExpDate, formattedDate);
-
+            console.log(' newExpDate, formattedDate, newExpDate.getTime() = ',  newExpDate, formattedDate, newExpDate.getTime());
+            console.log('experiencedate', experiencedate);
             const formData = new  FormData();
             formData.append('image', docImg);
             formData.append('name', formattedDate);
@@ -48,6 +48,7 @@ const AddDoctor = () => {
             formData.append('about', about);
             formData.append('speciality', speciality);
             formData.append('address', JSON.stringify({line1: address1, line2: address2}));
+            formData.append('date', newExpDate.getTime());
 
 
             //console.log(formData)
