@@ -19,7 +19,6 @@ const AddDoctor = () => {
 
 
     const {backendUrl, aToken, doctors, getAllDoctors} = useContext(AdminContext);
-
     const onSubmitHandler = async (event) => {
         event.preventDefault();
         try {
@@ -27,17 +26,9 @@ const AddDoctor = () => {
                 return toast.error('Image not selected')
             }
 
-            console.log(' new  experiencedate = ',   new Date(experiencedate));
-
-            //const date = docSlots[slotIndex][0].datetime
-            // let day = experiencedate.slice(9, 10);
-            // let month = experiencedate.slice(6, 7);
-            // let year = experiencedate.slice(0, 4);
-            // let newDate = day + "_" + month + "_" + year;
             const newExpDate =  new Date(experiencedate);
             const formattedDate =  newExpDate.toLocaleDateString('en-GB', { year: 'numeric', day: '2-digit', month: '2-digit' }).replace(/[/]/g, '_');;
             console.log(' newExpDate, formattedDate, newExpDate.getTime() = ',  newExpDate, formattedDate, newExpDate.getTime());
-            console.log('experiencedate', experiencedate);
             const formData = new  FormData();
             formData.append('image', docImg);
             formData.append('name', formattedDate);
@@ -48,24 +39,11 @@ const AddDoctor = () => {
             formData.append('about', about);
             formData.append('speciality', speciality);
             formData.append('address', JSON.stringify({line1: address1, line2: address2}));
-            formData.append('date', newExpDate.getTime());
 
-
-            //console.log(formData)
-            formData.forEach((value, key)=>{
-                console.log(`${key} : ${value}`);
-            })
-
-
-
-            console.log('formData = ',  formData);
-            //console.log('doctors.find = ',  doctors.find((doc)=> doc.experiencedate === formattedDate).experiencedate);
             if(doctors.find((doc)=> doc.experiencedate === formattedDate)) {
                 toast.warning('Деь' + formattedDate + 'вже в роботі. Оберіть наступний');
             } else {
                 const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: {aToken}});
-                console.log('formattedDate = ',  formattedDate);
-                console.log('doctors.experiencedate = ',  doctors.find((doc)=> doc.experiencedate === formattedDate));
                 if(data.success) {
                     toast.success(data.message);
                     setDocImg(false);

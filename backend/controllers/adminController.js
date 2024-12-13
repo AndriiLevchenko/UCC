@@ -44,7 +44,7 @@ console.log("name in Controller = ", name);
             about,
             fees,
             address: JSON.parse(address),
-            date
+            date: Date.now()
         }
         const newDoctor = new doctorModel(doctorData);
         await newDoctor.save()
