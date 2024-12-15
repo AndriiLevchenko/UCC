@@ -10,8 +10,9 @@ const MyAppointments = () => {
     const { backendUrl, token } = useContext(AppContext)
     const navigate = useNavigate()
 
-    const [appointments, setAppointments] = useState([])
-    const [payment, setPayment] = useState('')
+    const [appointments, setAppointments] = useState([]);
+    const [payment, setPayment] = useState('');
+    const [filterAppointments, setFilterAppointments] = useState([]);
 
     const months = [" ", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -33,6 +34,24 @@ const MyAppointments = () => {
             toast.error(error.message)
         }
     }
+
+
+
+
+    const applyFilter = () => {
+        console.log("new Date() = ", new Date());
+        const firstJanuary = new Date(new Date().getFullYear(), 0, 1);
+        const newAppointments = appointments.filter(doc =>{
+            const timeDate = new Date(doc.docData.name.slice(3, 5) + "/" + doc.docData.name.slice(0, 2) + "/" + doc.docData.name.slice(6, 10));
+            console.log("  timeDate, firstJanuary.getTime(), timeDate.getTime()  = ", timeDate, firstJanuary.getTime(), timeDate.getTime());
+            return timeDate.getTime() >= (firstJanuary.getTime())
+        });
+        const sortedAppointments = newAppointments.sort((c1, c2) => (c1.docData.name > c2.docData.name)  ? 1 : (c1.docData.name < c2.docData.name) ? -1 : 0);
+        console.log("  sortedAppointments  = ", sortedAppointments );
+        setFilterAppointments(sortedAppointments);
+    }
+
+
 
     // Function to cancel appointment Using API
     const cancelAppointment = async (appointmentId) => {
@@ -122,12 +141,14 @@ const MyAppointments = () => {
             getUserAppointments()
         }
     }, [token])
-
+    useEffect(()=>{
+        applyFilter();
+    }, [appointments])
     return (
         <div>
             <p className='pb-3 mt-12 text-lg font-medium text-gray-600 border-b'>Мої зустрічі</p>
             <div className=''>
-                {appointments.map((item, index) => (
+                {filterAppointments.map((item, index) => (
                     <div key={index} className='grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-4 border-b'>
                         <div>
                             <img className='w-36 bg-[#EAEFFF]' src={item.docData.image} alt="" />

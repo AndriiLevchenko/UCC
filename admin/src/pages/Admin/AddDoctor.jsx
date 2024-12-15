@@ -34,7 +34,7 @@ const AddDoctor = () => {
             formData.append('name', formattedDate);
             formData.append('email', email);
             formData.append('password', password);
-            formData.append('experiencedate', formattedDate);
+            formData.append('experiencedate', experiencedate);
             formData.append('fees', Number(fees));
             formData.append('about', about);
             formData.append('speciality', speciality);

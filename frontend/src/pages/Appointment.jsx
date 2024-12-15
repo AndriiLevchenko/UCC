@@ -16,7 +16,6 @@ const Appointment = () => {
     const [docSlots, setDocSlots] = useState([]);
     const [slotIndex, setSlotIndex] = useState(0);
     const [slotTime, setSlotTime] = useState('');
-    //console.log("docInfo, slotIndex = ", docInfo,  slotIndex);
     const navigate = useNavigate();
 
     const fetchDocInfo = async () => {
@@ -62,10 +61,7 @@ const Appointment = () => {
                 let year = currentDate.getFullYear()
 
                 const slotDate = day + "_" + month + "_" + year;
-                //console.log("slotDate = ", slotDate );
-                //console.log(" docInfo = ",  docInfo );
                 const slotTime = formattedTime
-                // const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true
                 const isSlotAvailable = docInfo && docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true
                 if (isSlotAvailable) {
 
@@ -74,7 +70,6 @@ const Appointment = () => {
                         datetime: new Date(currentDate),
                         time: formattedTime
                     })
-                    //console.log("timeSlots = ", timeSlots);
                 }
 
                 // Increment current time by 30 minutes
@@ -94,10 +89,7 @@ const Appointment = () => {
             toast.warning('Login to book appointment')
             return navigate('/login')
         }
-        console.log(" docSlots = ",  docSlots);
-        console.log(" docSlots[slotIndex], slotIndex  = ",  docSlots[slotIndex], slotIndex);
         const date = docSlots[slotIndex][0].datetime;
-        console.log("date = ",  date);
         let day = date.getDate()
         let month = date.getMonth() + 1
         let year = date.getFullYear()
@@ -168,14 +160,13 @@ const Appointment = () => {
                 <div className='flex gap-3 items-center w-full flex-wrap mt-4'>
                     {docSlots.length && docSlots.map((item, index) => (
                         <button onClick={() => {setSlotIndex(index);
-                                                alert(index);
+                                                alert("Оберіть час та призначте зустріч");
                                                 console.log(" item[0].datetime.getDate() docInfo.name = ",  item[0].datetime.getDate(), docInfo.name.slice(0, 2) );
                                                 console.log("docSlots[index] =  = ", docSlots[index]);
                                                 }
                                         }
                                 key={index}
                                 className={`min-h-[97px] text-center py-6 min-w-16 rounded-full cursor-pointer ${ item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2)) ? 'bg-primary text-white' : 'disabled opacity-30 border border-[#DDDDDD]'}`}
-                                // disabled={item[0] && item[0].datetime.getDate() === Number(docInfo.name.slice(0, 2))  ? '' : ''}
                                 disabled={item[0] && item[0].datetime.getDate() !== Number(docInfo.name.slice(0, 2)) || docSlots[index].length === 0}
                                 property = {docSlots[index].length}
                         >

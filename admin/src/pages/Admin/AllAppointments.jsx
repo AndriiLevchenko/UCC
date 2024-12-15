@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {AdminContext} from "../../context/AdminContext.jsx";
 import {AppContext} from "../../context/AppContext.jsx";
 import {assets} from "../../assets/assets.js";
@@ -6,11 +6,29 @@ import {assets} from "../../assets/assets.js";
 const AllAppointments = () => {
     const {aToken, appointments, getAllAppointments, cancelAppointment} = useContext(AdminContext);
     const {calculateAge, slotDateFormat, currency} = useContext(AppContext);
+    const [filterAppointments, setFilterAppointments] = useState([]);
+
+    const applyFilter = () => {
+        console.log("new Date() = ", new Date());
+        const firstJanuary = new Date(new Date().getFullYear(), 0, 1);
+        const newAppointments = appointments.filter(doc =>{
+            const timeDate = new Date(doc.docData.name.slice(3, 5) + "/" + doc.docData.name.slice(0, 2) + "/" + doc.docData.name.slice(6, 10));
+            console.log("  timeDate, firstJanuary.getTime(), timeDate.getTime()  = ", timeDate, firstJanuary.getTime(), timeDate.getTime());
+            return timeDate.getTime() >= (firstJanuary.getTime())
+        });
+        const sortedAppointments = newAppointments.sort((c1, c2) => (c1.docData.name > c2.docData.name)  ? 1 : (c1.docData.name < c2.docData.name) ? -1 : 0);
+        console.log("  sortedAppointments  = ", sortedAppointments );
+        setFilterAppointments(sortedAppointments);
+    }
+
     useEffect(()=> {
         if(aToken) {
             getAllAppointments();
         }
     }, [aToken])
+    useEffect(()=>{
+        applyFilter();
+    }, [appointments])
     return (
         <div className='w-full max-w-6xl m-5 '>
             <p className='mb-3 text-lg font-medium'>All Appointments</p>
@@ -24,7 +42,7 @@ const AllAppointments = () => {
                     <p>Fees</p>
                     <p>Action</p>
                 </div>
-                {appointments.map((item, index) => (
+                {filterAppointments.map((item, index) => (
                     <div className='flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50' key={index}>
                         <p className='max-sm:hidden'>{index+1}</p>
                         <div className='flex items-center gap-2'>
