@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -25,10 +25,8 @@ const MyAppointments = () => {
     // Getting User Appointments Data Using API
     const getUserAppointments = async () => {
         try {
-
             const { data } = await axios.get(backendUrl + '/api/user/appointments', { headers: { token } })
             setAppointments(data.appointments.reverse())
-
         } catch (error) {
             console.log(error)
             toast.error(error.message)
@@ -39,11 +37,9 @@ const MyAppointments = () => {
 
 
     const applyFilter = () => {
-        console.log("new Date() = ", new Date());
         const firstJanuary = new Date(new Date().getFullYear(), 0, 1);
         const newAppointments = appointments.filter(doc =>{
             const timeDate = new Date(doc.docData.name.slice(3, 5) + "/" + doc.docData.name.slice(0, 2) + "/" + doc.docData.name.slice(6, 10));
-            console.log("  timeDate, firstJanuary.getTime(), timeDate.getTime()  = ", timeDate, firstJanuary.getTime(), timeDate.getTime());
             return timeDate.getTime() >= (firstJanuary.getTime())
         });
         const sortedAppointments = newAppointments.sort((c1, c2) => (c1.docData.name > c2.docData.name)  ? 1 : (c1.docData.name < c2.docData.name) ? -1 : 0);
@@ -57,9 +53,7 @@ const MyAppointments = () => {
     const cancelAppointment = async (appointmentId) => {
 
         try {
-
             const { data } = await axios.post(backendUrl + '/api/user/cancel-appointment', { appointmentId }, { headers: { token } })
-
             if (data.success) {
                 toast.success(data.message)
                 getUserAppointments()
@@ -84,9 +78,6 @@ const MyAppointments = () => {
             order_id: order.id,
             receipt: order.receipt,
             handler: async (response) => {
-
-                console.log(response)
-
                 try {
                     const { data } = await axios.post(backendUrl + "/api/user/verifyRazorpay", response, { headers: { token } });
                     if (data.success) {
@@ -134,8 +125,6 @@ const MyAppointments = () => {
         }
     }
 
-
-
     useEffect(() => {
         if (token) {
             getUserAppointments()
@@ -163,7 +152,8 @@ const MyAppointments = () => {
                         </div>
                         <div></div>
                         <div className='flex flex-col gap-2 justify-end text-sm text-center'>
-                            {!item.cancelled && !item.payment && !item.isCompleted && payment !== item._id && <button onClick={() => setPayment(item._id)} className='text-[#696969] sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>}
+                            {/*{!item.cancelled && !item.payment && !item.isCompleted && payment !== item._id && <button onClick={() => setPayment(item._id)} className='text-[#696969] sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>}*/}
+                            {!item.cancelled && !item.payment && !item.isCompleted && payment !== item._id && <Link to={'https://bank.gov.ua/ua/about/support-the-armed-forces'} className='text-[#696969] sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</Link>}
                             {!item.cancelled && !item.payment && !item.isCompleted && payment === item._id && <button onClick={() => appointmentStripe(item._id)} className='text-[#696969] sm:min-w-48 py-2 border rounded hover:bg-gray-100 hover:text-white transition-all duration-300 flex items-center justify-center'><img className='max-w-20 max-h-5' src={assets.stripe_logo} alt="" /></button>}
                             {!item.cancelled && !item.payment && !item.isCompleted && payment === item._id && <button onClick={() => appointmentRazorpay(item._id)} className='text-[#696969] sm:min-w-48 py-2 border rounded hover:bg-gray-100 hover:text-white transition-all duration-300 flex items-center justify-center'><img className='max-w-20 max-h-5' src={assets.razorpay_logo} alt="" /></button>}
                             {!item.cancelled && item.payment && !item.isCompleted && <button className='sm:min-w-48 py-2 border rounded text-[#696969]  bg-[#EAEFFF]'>Paid</button>}
