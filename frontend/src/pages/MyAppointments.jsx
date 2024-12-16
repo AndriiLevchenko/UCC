@@ -42,7 +42,7 @@ const MyAppointments = () => {
             const timeDate = new Date(doc.docData.name.slice(3, 5) + "/" + doc.docData.name.slice(0, 2) + "/" + doc.docData.name.slice(6, 10));
             return timeDate.getTime() >= (firstJanuary.getTime())
         });
-        const sortedAppointments = newAppointments.sort((c1, c2) => (c1.docData.name > c2.docData.name)  ? 1 : (c1.docData.name < c2.docData.name) ? -1 : 0);
+        const sortedAppointments = newAppointments.sort((c1, c2) => (c1.docData.experiencedate > c2.docData.experiencedate)  ? 1 : (c1.docData.experiencedate < c2.docData.experiencedate) ? -1 : 0);
         console.log("  sortedAppointments  = ", sortedAppointments );
         setFilterAppointments(sortedAppointments);
     }

@@ -27,8 +27,9 @@ const AddDoctor = () => {
             }
 
             const newExpDate =  new Date(experiencedate);
+            const today14 = (new Date()).setHours(14, 0, 0, 0);
             const formattedDate =  newExpDate.toLocaleDateString('en-GB', { year: 'numeric', day: '2-digit', month: '2-digit' }).replace(/[/]/g, '_');;
-            console.log(' newExpDate, formattedDate, newExpDate.getTime() = ',  newExpDate, formattedDate, newExpDate.getTime());
+            //console.log(' newExpDate, formattedDate, newExpDate.getTime() = ',  newExpDate, formattedDate, newExpDate.getTime());
             const formData = new  FormData();
             formData.append('image', docImg);
             formData.append('name', formattedDate);
@@ -41,7 +42,9 @@ const AddDoctor = () => {
             formData.append('address', JSON.stringify({line1: address1, line2: address2}));
 
             if(doctors.find((doc)=> doc.experiencedate === formattedDate)) {
-                toast.warning('Деь' + formattedDate + 'вже в роботі. Оберіть наступний');
+                toast.warning('День ' + formattedDate + ' вже в роботі. Оберіть наступний');
+            } else if (newExpDate.getTime() < today14) {
+                toast.warning('Робочий день ' + formattedDate + ' вже минув. Оберіть наступний');
             } else {
                 const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: {aToken}});
                 if(data.success) {
