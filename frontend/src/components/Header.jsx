@@ -10,7 +10,7 @@ const Header = () => {
 
             {/* --------- Header Left --------- */}
             <div className='md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 m-auto md:pb-[10vw] md:mb-[-30px]'>
-                <p className='text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight md:leading-tight lg:leading-tight'>
+                <p className=' gradientAnimation text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight md:leading-tight lg:leading-tight'>
                     Призначити зустріч
                 </p>
                 <div className='flex flex-col md:flex-row items-center gap-3 text-white text-sm lg:text-s font-light'>

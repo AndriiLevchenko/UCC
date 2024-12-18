@@ -18,7 +18,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-[#ADADAD]'>
+    <div className='flex relative items-center justify-between text-sm py-4 mb-5 border-b border-b-[#ADADAD]'>
       <Link to={'https://www.ucc-ffm.de'} ><img  className='w-44 cursor-pointer' src={assets.logo} alt="" /></Link>
       <ul className='md:flex items-start gap-5 font-medium hidden'>
         <NavLink to='/' >
@@ -71,6 +71,8 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      <img  className='image' src={assets.OrnamentLong} alt="" />
+      <div className='imageAnimation'></div>
     </div>
   )
 }
