@@ -53,7 +53,7 @@ img.image {
     height: 20px;
     position: absolute;
     bottom: -10px;
-    z-index: 33;
+    z-index: 3;
     background-color: white;
     transition: width 2s;
     opacity: 1;

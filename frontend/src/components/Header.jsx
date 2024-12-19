@@ -17,7 +17,7 @@ const Header = () => {
                     <img className='w-28' src={assets.group_profiles} alt="" />
                     <p>Зареєструйтесь, і ви зможете призначити зустріч в Українському координаційному центрі</p>
                 </div>
-                <a onClick={() => navigate('/doctors')}  className='flex items-center gap-2 bg-white px-8 py-3 rounded-full text-[#595959] text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300 cursor-pointer'>
+                <a onClick={() => navigate('/doctors')}  className='flex items-center gap-2 bg-white px-8 py-3 rounded-full text-[#595959] sm:text-base text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300 cursor-pointer'>
                     Призначити зустріч <img className='w-3' src={assets.arrow_icon} alt="" />
                 </a>
             </div>

@@ -12,7 +12,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <p className='text-xl font-medium mb-5'>УКЦ</p>
+          <p className='text-xl font-semibold mb-5'>УКЦ</p>
           <ul className='flex flex-col gap-2 text-gray-600'>
             <li>Домашня сторінка</li>
             <li>Політика конфіденційності</li>
@@ -20,7 +20,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <p className='text-xl font-medium mb-5'>КОНТАКТИ</p>
+          <p className='text-xl font-semibold mb-5'>КОНТАКТИ</p>
           <ul className='flex flex-col gap-2 text-gray-600'>
             <li>Mainzer Landstraße 293 , Frankfurt, Germany</li>
             <li>069 21273852</li>
