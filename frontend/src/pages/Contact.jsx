@@ -1,5 +1,6 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import {Link} from "react-router-dom";
 
 const Contact = () => {
   return (
@@ -17,7 +18,7 @@ const Contact = () => {
           <p className=' text-gray-500'>Tel: +49(069) 212 73 852 <br /> Email: uainfmm@gmail.com</p>
           <p className=' font-semibold text-lg text-gray-600'>Волонтерство в Українському Координаційному Центрі</p>
           <p className=' text-gray-500'>Дізнайся більше про наші активності</p>
-          <button className='border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500'>Дізнатись</button>
+          <Link  className='bg-primary text-white text-sm font-medium hover:scale-105 px-20 py-3 rounded-full my-6' to={'https://www.facebook.com/uccfrankfurt/?locale=uk_UA'} >Дізнвтись</Link>
         </div>
       </div>
 

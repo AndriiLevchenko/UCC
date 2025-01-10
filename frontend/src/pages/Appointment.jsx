@@ -180,12 +180,12 @@ const Appointment = () => {
                     <div className='flex items-center gap-3 w-full flex-wrap mt-4'>
                         {docSlots.length && docSlots[slotIndex].map((item, index) => {
                             return <p onClick={() => setSlotTime(item.time)} key={index}
-                               className={`text-sm font-light  flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary text-white' : 'text-[#949494] border border-[#B4B4B4]'}`}>{item.time.toLowerCase()}</p>
+                               className={`text-sm font-light  flex-shrink-0 px-5 py-2 rounded-full cursor-pointer hover:scale-105 ${item.time === slotTime ? 'bg-primary text-white' : 'text-[#949494] border border-[#B4B4B4]'}`}>{item.time.toLowerCase()}</p>
                         })}
                     </div>
                 }
 
-                <button onClick={bookAppointment} className='bg-primary text-white text-sm font-light px-20 py-3 rounded-full my-6'>Призначити зустріч</button>
+                <button onClick={bookAppointment} className='bg-primary text-white text-sm font-medium px-20 py-3 rounded-full hover:scale-105 my-6'>Призначити зустріч</button>
             </div>
 
             {/* Listing Releated Doctors */}
