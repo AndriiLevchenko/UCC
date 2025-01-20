@@ -8,7 +8,7 @@ const Footer = () => {
 
         <div>
           <img className='mb-5 w-40' src={assets.logo} alt="" />
-          <p className='w-full md:w-2/3 text-gray-600 leading-6'>Український координаційний центр надає підтримку українським переселенцям у Франкфурт</p>
+          <p className='w-full md:w-2/3 text-gray-600 leading-6'>Український координаційний центр надає підтримку українським переселенцям у Франкфурті</p>
         </div>
 
         <div>

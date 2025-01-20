@@ -9,7 +9,7 @@ const AllAppointments = () => {
     const [filterAppointments, setFilterAppointments] = useState([]);
 
     const applyFilter = () => {
-        console.log("new Date() = ", new Date());
+        console.log("filterAppointments = ", filterAppointments);
         const firstJanuary = new Date(new Date().getFullYear(), 0, 1);
         const newAppointments = appointments.filter(doc =>{
             const timeDate = new Date(doc.docData.name.slice(3, 5) + "/" + doc.docData.name.slice(0, 2) + "/" + doc.docData.name.slice(6, 10));
@@ -36,7 +36,7 @@ const AllAppointments = () => {
                 <div className='hidden sm:grid grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] grid-flow-col py-3 px-6 border-b'>
                     <p>#</p>
                     <p>Відвідувач</p>
-                    <p>Вік</p>
+                    <p></p>
                     <p>Дата та час</p>
                     <p>День</p>
                     <p>Вартість</p>
@@ -45,10 +45,10 @@ const AllAppointments = () => {
                 {filterAppointments.map((item, index) => (
                     <div className='flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50' key={index}>
                         <p className='max-sm:hidden'>{index+1}</p>
-                        <div className='flex items-center gap-2'>
-                            <img src={item.userData.image} className='w-8 rounded-full' alt="" /> <p>{item.userData.name}</p>
+                        <div className='flex items-center gap-2 min-w-[215px]'>
+                            <img src={item.userData.image} className='w-8 rounded-full' alt="" /> <div className='flex flex-col'><p><span>{item.userData.name}</span>, <span className='max-sm:hidden'>{calculateAge(item.userData.dob)}</span></p><p>{item.userData.email}</p></div>
                         </div>
-                        <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
+                        <p></p>
                         <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
                         <div className='flex items-center gap-2'>
                             <img src={item.docData.image} className='w-8 rounded-full bg-gray-200' alt="" /> <p>{item.docData.name}</p>
