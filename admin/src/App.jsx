@@ -24,7 +24,7 @@ const App = () => {
     <div className='bg-[#F8F9FD]'>
       <ToastContainer />
       <Navbar />
-      <div className='flex items-start'>
+      <div className='md:flex items-start'>
         <Sidebar />
         <Routes>
           <Route path='/' element={<></>} />

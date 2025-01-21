@@ -48,7 +48,7 @@ console.log("name in Controller = ", name);
         }
         const newDoctor = new doctorModel(doctorData);
         await newDoctor.save()
-        res.json({success: true, message: "Doctor added  реально"})
+        res.json({success: true, message: "Консультаційний день додано"})
 
     } catch (error) {
         console.log("error = ", error)
