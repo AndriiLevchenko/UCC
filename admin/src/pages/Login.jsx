@@ -21,6 +21,7 @@ const Login = () => {
                 console.log("em. pass 1 = ", email, password);
                 const {data} = await axios.post(backendUrl + '/api/admin/login', {email, password}, {headers:  { 'Content-Type': 'application/json'}});
                 console.log("em. pass 2 = ", email, password);
+                console.log("data = ", data);
                 if(data.success) {
                     console.log("token 3 = ", data.token);
                     localStorage.setItem('aToken', data.token);
@@ -53,7 +54,7 @@ const Login = () => {
     return (
         <form onSubmit={onSubmitHandler} className='flex items-center min-h-[80vh] '>
             <div className='flex flex-col m-auto gap-3 items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-#5e5e5e text-sm shadow-lg  '>
-            <p className='text-2xl font-semibold m-auto'><span className='text-primary'> {state} </span> Login </p>
+            <p className='text-2xl font-semibold m-auto'><span className='text-primary'> {state === "Doctor" ? "Consultant" : "Adminn"} </span> Login </p>
                 {state === 'Admin'
                     ?   <div className='w-full'>
                             <p> Email </p>
