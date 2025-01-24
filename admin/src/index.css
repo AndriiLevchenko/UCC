@@ -11,3 +11,8 @@
 ::-webkit-scrollbar{
     display: none;
 }
+.appointmentsTable {
+    display: table;
+    width: 100%;
+    overflow-x: auto;
+}
